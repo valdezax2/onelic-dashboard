@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% from "macros.html" import status_badge, category_badge %}
+
+{% block title %}All Commitments{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="page-header__title-group">
+    <h1 class="page-header__title">All Commitments</h1>
+    <p class="page-header__sub">{{ commitments | length }} item{% if commitments | length != 1 %}s{% endif %} &middot; One LIC Neighborhood Plan</p>
+  </div>
+</div>
+
+<!-- Filter Chips -->
+<div class="filter-row">
+  <div class="chips">
+    <a href="{{ url_for('projects') }}"
+       class="chip {% if active_category == 'All' %}chip--active{% endif %}">All</a>
+    {% for cat in categories %}
+    <a href="{{ url_for('projects', category=cat, status=active_status) }}"
+       class="chip {% if active_category == cat %}chip--active{% endif %}">{{ cat }}</a>
+    {% endfor %}
+  </div>
+  <div class="filter-status">
+    <form method="get" action="{{ url_for('projects') }}" id="status-form">
+      {% if active_category != 'All' %}
+        <input type="hidden" name="category" value="{{ active_category }}">
+      {% endif %}
+      <select name="status" class="select" onchange="document.getElementById('status-form').submit()">
+        <option value="All" {% if active_status == 'All' %}selected{% endif %}>All Statuses</option>
+        <option value="Planned" {% if active_status == 'Planned' %}selected{% endif %}>Planned</option>
+        <option value="In Progress" {% if active_status == 'In Progress' %}selected{% endif %}>In Progress</option>
+        <option value="Complete" {% if active_status == 'Complete' %}selected{% endif %}>Complete</option>
+      </select>
+    </form>
+  </div>
+</div>
+
+<!-- Full Table -->
+<div class="data-table-wrap">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th style="width:90px">ID</th>
+        <th style="width:110px">CATEGORY</th>
+        <th>COMMITMENT</th>
+        <th style="width:130px">AMOUNT</th>
+        <th style="width:140px">AGENCY</th>
+        <th style="width:100px">STATUS</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in commitments %}
+      <tr class="data-table__row" onclick="window.location='{{ url_for('detail', commitment_id=item.id) }}'">
+        <td class="table-id">{{ item.id }}</td>
+        <td>{{ category_badge(item.category) }}</td>
+        <td>
+          <div class="row-title">{{ item.promise }}</div>
+          <div class="row-sub">{{ item.geography_site }}</div>
+        </td>
+        <td class="table-amount">{{ item.amount }}</td>
+        <td class="text-secondary">{{ item.responsible_agency }}</td>
+        <td>{{ status_badge(item.status) }}</td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="6" class="table-empty">No commitments match the selected filters.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

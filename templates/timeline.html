@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% from "macros.html" import status_badge, category_badge %}
+
+{% block title %}Timeline{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="page-header__title-group">
+    <h1 class="page-header__title">Commitment Timeline</h1>
+    <p class="page-header__sub">
+      {{ by_category.values() | sum(start=[]) | list | length }} commitments across {{ by_category | length }} categories &middot; Timeframes as stated
+    </p>
+  </div>
+</div>
+
+<div class="timeline-layout">
+
+  <!-- Phase Legend -->
+  <div class="timeline-legend">
+    <div class="timeline-legend__card">
+      <div class="timeline-legend__label">PHASE</div>
+      <div class="timeline-legend__item timeline-legend__item--active">Upon Rezoning</div>
+      <div class="timeline-legend__item">Short-term</div>
+      <div class="timeline-legend__item">Long-term</div>
+      <div class="timeline-legend__item">TBD</div>
+    </div>
+  </div>
+
+  <!-- Category Groups -->
+  <div class="timeline-groups">
+    {% for category, items in by_category.items() %}
+    {% set cat_slug = category | lower | replace(' ', '-') %}
+    <div class="timeline-category">
+      <div class="timeline-category__header">
+        <span class="timeline-category__dot timeline-category__dot--{{ cat_slug }}"></span>
+        <span class="timeline-category__name">{{ category }}</span>
+        <span class="timeline-category__sub">
+          {{ items | length }} commitment{% if items | length != 1 %}s{% endif %}
+          {% set capital = [] %}
+          {% for item in items %}
+            {% if item.amount and '$' in item.amount %}
+              {% set _ = capital.append(item.amount) %}
+            {% endif %}
+          {% endfor %}
+          {% if capital %} &mdash; {{ capital | join(', ') }}{% endif %}
+        </span>
+      </div>
+      <div class="timeline-items">
+        {% for item in items %}
+        <a href="{{ url_for('detail', commitment_id=item.id) }}"
+           class="timeline-item {% if item.status == 'Complete' %}timeline-item--complete{% endif %}">
+          <div class="timeline-item__id">{{ item.id }}</div>
+          <div class="timeline-item__name">{{ item.promise }}</div>
+          <div class="timeline-item__time">{{ item.timeframe }}</div>
+          {{ status_badge(item.status) }}
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
+{% endblock %}

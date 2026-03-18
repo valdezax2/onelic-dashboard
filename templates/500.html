@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}500 — Server Error{% endblock %}
+{% block content %}
+<div class="error-page">
+  <div class="error-page__code">500</div>
+  <div class="error-page__title">Something went wrong</div>
+  <div class="error-page__sub">Could not load data. Please try again shortly.</div>
+  <a href="{{ url_for('index') }}" class="btn btn--primary">Back to Overview</a>
+</div>
+{% endblock %}

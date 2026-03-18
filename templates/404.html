@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}404 — Not Found{% endblock %}
+{% block content %}
+<div class="error-page">
+  <div class="error-page__code">404</div>
+  <div class="error-page__title">Commitment Not Found</div>
+  <div class="error-page__sub">The commitment ID you're looking for doesn't exist in the plan.</div>
+  <a href="{{ url_for('index') }}" class="btn btn--primary">Back to Overview</a>
+</div>
+{% endblock %}

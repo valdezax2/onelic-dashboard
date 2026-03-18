@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% from "macros.html" import status_badge, category_badge %}
+
+{% block title %}{{ item.id }} — {{ item.promise[:40] }}{% endblock %}
+
+{% block content %}
+
+<!-- Hero Banner -->
+{% set cat_slug = item.category | lower | replace(' ', '-') %}
+{% set hero_queries = {
+  'housing': 'housing,architecture,nyc',
+  'parks': 'park,bridge,greenspace',
+  'nycha': 'public,housing,urban',
+  'community': 'community,center,urban'
+} %}
+<div class="hero" style="background-image: url('https://source.unsplash.com/1200x400/?{{ hero_queries.get(cat_slug, 'urban,nyc') }}');">
+  <div class="hero__overlay">
+    <div class="hero__breadcrumb">
+      <a href="{{ url_for('projects') }}" class="hero__bc-link">Projects</a>
+      <span class="hero__bc-sep">/</span>
+      <span>{{ item.id }}</span>
+    </div>
+    <h1 class="hero__title">{{ item.promise }}</h1>
+    <div class="hero__meta">
+      {{ category_badge(item.category) }}
+      {{ status_badge(item.status) }}
+      <span class="hero__amount">{{ item.amount }}</span>
+    </div>
+  </div>
+</div>
+
+<!-- Detail Content -->
+<div class="detail-grid">
+  <!-- Left Column -->
+  <div class="detail-left">
+
+    <!-- Info Cards -->
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-card__label">AMOUNT</div>
+        <div class="info-card__value text-green">{{ item.amount }}</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card__label">AGENCY</div>
+        <div class="info-card__value">{{ item.responsible_agency }}</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card__label">TIMEFRAME</div>
+        <div class="info-card__value text-orange">{{ item.timeframe }}</div>
+      </div>
+    </div>
+
+    <!-- Geography -->
+    <div class="card card--detail">
+      <div class="detail-row">
+        <span class="detail-row__label">Geography / Site</span>
+        <span class="detail-row__value">{{ item.geography_site }}</span>
+      </div>
+    </div>
+
+    <!-- Notes -->
+    <div class="card card--detail">
+      <h2 class="card__title">Notes</h2>
+      <p class="card__body">{{ item.notes }}</p>
+    </div>
+
+    <!-- Verification -->
+    <a href="{{ item.verification_url }}" target="_blank" rel="noopener" class="card card--detail card--link verify-card">
+      <i data-lucide="external-link" class="verify-card__icon"></i>
+      <div>
+        <div class="verify-card__label">Verification Source</div>
+        <div class="verify-card__url">{{ item.verification_url }}</div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- Right Column -->
+  <div class="detail-right">
+    <h2 class="card__title">Related Commitments</h2>
+    {% if related %}
+      {% for rel in related %}
+      <a href="{{ url_for('detail', commitment_id=rel.id) }}" class="related-card">
+        <div class="related-card__id">{{ rel.id }}</div>
+        <div class="related-card__name">{{ rel.promise }}</div>
+        {{ status_badge(rel.status) }}
+      </a>
+      {% endfor %}
+    {% else %}
+      <p class="text-muted">No related commitments.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

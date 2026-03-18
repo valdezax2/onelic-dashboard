@@ -1,0 +1,25 @@
+{% macro status_badge(status) %}
+  {% if status == "Complete" %}
+    <span class="badge badge--complete">Complete</span>
+  {% elif status == "In Progress" %}
+    <span class="badge badge--progress">In Progress</span>
+  {% else %}
+    <span class="badge badge--planned">Planned</span>
+  {% endif %}
+{% endmacro %}
+
+{% macro category_badge(category) %}
+  {% set slug = category | lower | replace(' ', '-') %}
+  <span class="badge badge--cat-{{ slug }}">{{ category }}</span>
+{% endmacro %}
+
+{% macro kpi_card(label, value, sub, color_class, bar_pct) %}
+  <div class="kpi-card">
+    <div class="kpi-card__label">{{ label }}</div>
+    <div class="kpi-card__value {{ color_class }}">{{ value }}</div>
+    <div class="kpi-card__sub">{{ sub }}</div>
+    <div class="kpi-card__bar-track">
+      <div class="kpi-card__bar-fill {{ color_class }}" style="width: {{ bar_pct }}%"></div>
+    </div>
+  </div>
+{% endmacro %}

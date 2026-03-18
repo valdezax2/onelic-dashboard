@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% from "macros.html" import status_badge, category_badge, kpi_card %}
+
+{% block title %}Overview{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="page-header__title-group">
+    <h1 class="page-header__title">Neighborhood Plan Overview</h1>
+    <p class="page-header__sub">Long Island City &middot; Tracking {{ stats.total }} active commitments</p>
+  </div>
+  <div class="live-badge">
+    <span class="live-badge__dot"></span>
+    Live
+  </div>
+</div>
+
+<!-- KPI Row -->
+<div class="kpi-row">
+  {{ kpi_card("Total Commitments", stats.total, "Across " ~ stats.categories | length ~ " categories", "text-white", 100) }}
+  {{ kpi_card("Complete", stats.complete, (stats.complete / stats.total * 100) | round(0) | int ~ "% completion rate", "text-green", (stats.complete / stats.total * 100)) }}
+  {{ kpi_card("Planned", stats.planned, (stats.planned / stats.total * 100) | round(0) | int ~ "% of plan pending", "text-orange", (stats.planned / stats.total * 100)) }}
+</div>
+
+<!-- Bottom Row -->
+<div class="bottom-row">
+
+  <!-- Key Commitments Table -->
+  <div class="card card--fill">
+    <div class="card__header">
+      <h2 class="card__title">Key Commitments</h2>
+      <a href="{{ url_for('projects') }}" class="card__link">View all &rarr;</a>
+    </div>
+    <div class="mini-table">
+      <div class="mini-table__head">
+        <div class="mini-table__col mini-table__col--fill">COMMITMENT</div>
+        <div class="mini-table__col" style="width:100px">CATEGORY</div>
+        <div class="mini-table__col" style="width:90px">STATUS</div>
+      </div>
+      {% for item in recent %}
+      <a href="{{ url_for('detail', commitment_id=item.id) }}" class="mini-table__row">
+        <div class="mini-table__col mini-table__col--fill">
+          <div class="row-title">{{ item.promise }}</div>
+          <div class="row-sub">{{ item.amount }} &middot; {{ item.responsible_agency }}</div>
+        </div>
+        <div class="mini-table__col" style="width:100px">
+          {{ category_badge(item.category) }}
+        </div>
+        <div class="mini-table__col" style="width:90px">
+          {{ status_badge(item.status) }}
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Priority Areas -->
+  <div class="card card--sidebar">
+    <h2 class="card__title">Priority Areas</h2>
+    {% for cat, count in stats.categories.items() %}
+    <div class="category-bar">
+      <div class="category-bar__label">
+        <span class="category-bar__name">{{ cat }}</span>
+        <span class="category-bar__count">{{ count }} item{% if count != 1 %}s{% endif %}</span>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill bar-fill--{{ cat | lower | replace(' ', '-') }}"
+             style="width: {{ (count / stats.total * 100) | round(0) | int }}%"></div>
+      </div>
+    </div>
+    {% endfor %}
+
+    <div class="milestones">
+      <h3 class="milestones__title">Upcoming Milestones</h3>
+      <div class="milestone">
+        <span class="milestone__dot"></span>
+        <div class="milestone__text">
+          <div class="milestone__name">Rezoning Vote – LIC Neighborhood Plan</div>
+          <div class="milestone__sub">Pending Council approval &middot; 2025–2026</div>
+        </div>
+      </div>
+      {% for item in all_commitments if item.status == "Complete" %}
+      <div class="milestone milestone--complete">
+        <span class="milestone__dot milestone__dot--green"></span>
+        <div class="milestone__text">
+          <div class="milestone__name">{{ item.id }} &mdash; {{ item.promise[:45] }}{% if item.promise | length > 45 %}…{% endif %}</div>
+          <div class="milestone__sub">{{ item.timeframe }}</div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+</div>
+{% endblock %}

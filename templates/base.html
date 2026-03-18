@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}One LIC Plan{% endblock %} — Neighborhood Dashboard</title>
+  <meta name="description" content="Track promises and commitments made under the One LIC Neighborhood Plan in Long Island City, Queens, NYC.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <!-- ══ Sidebar ══ -->
+    <aside class="sidebar">
+      <div class="sidebar__logo">
+        <div class="sidebar__logo-icon">LIC</div>
+        <div>
+          <div class="sidebar__logo-label">One LIC Plan</div>
+          <div class="sidebar__logo-sub">Neighborhood Dashboard</div>
+        </div>
+      </div>
+
+      <nav class="sidebar__nav">
+        <a href="{{ url_for('index') }}"
+           class="nav-item {% if request.endpoint == 'index' %}nav-item--active{% endif %}">
+          <i data-lucide="house"></i>
+          <span>Overview</span>
+        </a>
+        <a href="{{ url_for('projects') }}"
+           class="nav-item {% if request.endpoint in ['projects', 'detail'] %}nav-item--active{% endif %}">
+          <i data-lucide="map-pin"></i>
+          <span>Projects</span>
+        </a>
+        <a href="#"
+           class="nav-item nav-item--disabled">
+          <i data-lucide="users"></i>
+          <span>Community</span>
+        </a>
+        <a href="{{ url_for('timeline') }}"
+           class="nav-item {% if request.endpoint == 'timeline' %}nav-item--active{% endif %}">
+          <i data-lucide="calendar"></i>
+          <span>Timeline</span>
+        </a>
+      </nav>
+
+      <div class="sidebar__spacer"></div>
+
+      <div class="sidebar__footer">
+        <div class="sidebar__footer-text">One LIC Neighborhood Plan</div>
+        <div class="sidebar__footer-sub">Long Island City, Queens, NYC</div>
+      </div>
+    </aside>
+
+    <!-- ══ Main Content ══ -->
+    <main class="main-content">
+      {% block content %}{% endblock %}
+    </main>
+
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

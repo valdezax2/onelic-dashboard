@@ -1,0 +1,143 @@
+{
+  "metadata": {
+    "plan_name": "One LIC Neighborhood Plan",
+    "geography": "Long Island City, Queens, NYC",
+    "last_updated": "2026-03-18",
+    "source_url": "https://council.nyc.gov/julie-won/one-lic/",
+    "total_commitments": 11
+  },
+  "commitments": [
+    {
+      "id": "LIC-H-01",
+      "category": "Housing",
+      "promise": "New housing enabled by rezoning",
+      "amount": "~14,700–15,000 units",
+      "responsible_agency": "DCP / HPD",
+      "geography_site": "Rezoning area-wide",
+      "timeframe": "Long-term buildout",
+      "status": "Planned",
+      "notes": "Zoning capacity, not guaranteed construction",
+      "verification_url": "https://council.nyc.gov/julie-won/one-lic/"
+    },
+    {
+      "id": "LIC-H-02",
+      "category": "Housing",
+      "promise": "Permanently affordable housing",
+      "amount": "~4,350 units",
+      "responsible_agency": "HPD",
+      "geography_site": "Public + private sites",
+      "timeframe": "Long-term",
+      "status": "Planned",
+      "notes": "Mix of MIH + public land",
+      "verification_url": "https://council.nyc.gov/julie-won/one-lic/"
+    },
+    {
+      "id": "LIC-H-03",
+      "category": "Housing",
+      "promise": "Mandatory Inclusionary Housing mapped in LIC",
+      "amount": "20–25% requirement",
+      "responsible_agency": "DCP / HPD",
+      "geography_site": "Private development sites",
+      "timeframe": "Upon rezoning",
+      "status": "Complete",
+      "notes": "First MIH application in LIC",
+      "verification_url": "https://council.nyc.gov/julie-won/one-lic/"
+    },
+    {
+      "id": "LIC-H-04",
+      "category": "Housing",
+      "promise": "Affordable housing on public land",
+      "amount": "~1,000 units",
+      "responsible_agency": "HPD / EDC",
+      "geography_site": "Public sites",
+      "timeframe": "TBD",
+      "status": "Planned",
+      "notes": "~50% targeted to ELI/VLI",
+      "verification_url": "https://council.nyc.gov/julie-won/one-lic/"
+    },
+    {
+      "id": "LIC-NY-01",
+      "category": "NYCHA",
+      "promise": "Queensbridge plumbing & infrastructure upgrades",
+      "amount": "$102M",
+      "responsible_agency": "NYCHA",
+      "geography_site": "Queensbridge Houses",
+      "timeframe": "TBD",
+      "status": "Planned",
+      "notes": "Waste lines + core systems",
+      "verification_url": "https://www.nyc.gov/mayors-office/news/2025/11/most-pro-housing-administration-in-city-history--mayor-adams-cel"
+    },
+    {
+      "id": "LIC-NY-02",
+      "category": "NYCHA",
+      "promise": "Additional Queensbridge capital upgrades",
+      "amount": "$98.3M",
+      "responsible_agency": "NYCHA",
+      "geography_site": "Queensbridge Houses N/S",
+      "timeframe": "TBD",
+      "status": "Planned",
+      "notes": "Framed as part of $200M+ total",
+      "verification_url": "https://www.nyc.gov/mayors-office/news/2025/11/most-pro-housing-administration-in-city-history--mayor-adams-cel"
+    },
+    {
+      "id": "LIC-NY-03",
+      "category": "Community",
+      "promise": "Jacob Riis Community Center improvements",
+      "amount": "$6M",
+      "responsible_agency": "DPR / DDC",
+      "geography_site": "Queensbridge",
+      "timeframe": "TBD",
+      "status": "Planned",
+      "notes": "ADA, interiors, utilities",
+      "verification_url": "https://www.nyc.gov/mayors-office/news/2025/11/most-pro-housing-administration-in-city-history--mayor-adams-cel"
+    },
+    {
+      "id": "LIC-P-01",
+      "category": "Parks",
+      "promise": "New/expanded open space under Queensboro Bridge",
+      "amount": "~5 acres",
+      "responsible_agency": "DPR",
+      "geography_site": "Bridge underpass",
+      "timeframe": "TBD",
+      "status": "Planned",
+      "notes": "Includes Baby Park",
+      "verification_url": "https://www.nyc.gov/mayors-office/news/2025/11/most-pro-housing-administration-in-city-history--mayor-adams-cel"
+    },
+    {
+      "id": "LIC-P-02",
+      "category": "Parks",
+      "promise": "Under-Queensboro Bridge open space development",
+      "amount": "$95M",
+      "responsible_agency": "DPR / DDC",
+      "geography_site": "Queensboro Bridge area",
+      "timeframe": "TBD",
+      "status": "Planned",
+      "notes": "Major capital item",
+      "verification_url": "https://www.nyc.gov/assets/planning/downloads/pdf/our-work/plans/queens/lic-neighborhood-plan/draft-onelic-neighborhood-plan-pages.pdf"
+    },
+    {
+      "id": "LIC-P-03",
+      "category": "Parks",
+      "promise": "Queensbridge Park improvements",
+      "amount": "$30M",
+      "responsible_agency": "DPR",
+      "geography_site": "Queensbridge Park",
+      "timeframe": "TBD",
+      "status": "Planned",
+      "notes": "Capital reconstruction",
+      "verification_url": "https://www.nyc.gov/assets/planning/downloads/pdf/our-work/plans/queens/lic-neighborhood-plan/draft-onelic-neighborhood-plan-pages.pdf"
+    },
+    {
+      "id": "LIC-P-04",
+      "category": "Parks",
+      "promise": "Queensbridge Baby Park construction",
+      "amount": "$2.3M",
+      "responsible_agency": "DPR",
+      "geography_site": "Queensbridge",
+      "timeframe": "TBD",
+      "status": "Planned",
+      "notes": "Requires parking relocation",
+      "verification_url": "https://www.nyc.gov/assets/planning/downloads/pdf/our-work/plans/queens/lic-neighborhood-plan/draft-onelic-neighborhood-plan-pages.pdf"
+    }
+  ]
+}
