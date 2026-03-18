@@ -2,7 +2,7 @@ import requests
 import time
 
 # Update this URL once lic_commitments.json is pushed to GitHub:
-DATA_URL = "https://raw.githubusercontent.com/YOUR_USER/YOUR_REPO/main/lic_commitments.json"
+DATA_URL = "https://raw.githubusercontent.com/valdezax2/onelic-dashboard/main/lic_commitments.json"
 
 # Fallback: load from local file during development
 LOCAL_FALLBACK = "lic_commitments.json"
