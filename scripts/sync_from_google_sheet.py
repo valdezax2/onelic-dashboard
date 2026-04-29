@@ -16,18 +16,18 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_PATH = ROOT / "lic_commitments.json"
 
-REQUIRED_COLUMNS = [
-    "id",
-    "category",
-    "promise",
-    "amount",
-    "responsible_agency",
-    "geography_site",
-    "timeframe",
-    "status",
-    "notes",
-    "verification_url",
-]
+REQUIRED_COLUMNS = {
+    "id": ["commitment id", "id"],
+    "category": ["category"],
+    "promise": ["promise / commitment", "promise", "commitment"],
+    "amount": ["amount / scale", "amount", "scale"],
+    "responsible_agency": ["responsible agency", "agency"],
+    "geography_site": ["geography / site", "geography", "site"],
+    "timeframe": ["timeframe (as stated)", "timeframe"],
+    "status": ["status (initial)", "status"],
+    "notes": ["notes / verification fields", "notes", "verification fields"],
+    "verification_url": ["verification url", "verification link"],
+}
 
 
 def fetch_csv(csv_url: str) -> str:
@@ -39,24 +39,35 @@ def fetch_csv(csv_url: str) -> str:
         raise RuntimeError(f"Failed to fetch sheet CSV: {exc}") from exc
 
 
+def build_column_map(fieldnames: list[str]) -> dict[str, str]:
+    """Map internal column names to actual CSV headers."""
+    lower_to_actual = {name.strip().lower(): name for name in fieldnames if name}
+    mapping = {}
+
+    for internal_name, aliases in REQUIRED_COLUMNS.items():
+        for alias in aliases:
+            if alias.lower() in lower_to_actual:
+                mapping[internal_name] = lower_to_actual[alias.lower()]
+                break
+        
+        if internal_name not in mapping:
+            raise RuntimeError(f"Could not find column for '{internal_name}'. Available: {', '.join(lower_to_actual.keys())}")
+
+    return mapping
+
+
 def parse_rows(csv_text: str) -> list[dict[str, str]]:
     reader = csv.DictReader(io.StringIO(csv_text))
     if not reader.fieldnames:
         raise RuntimeError("CSV has no header row.")
 
-    lower_to_actual = {name.strip().lower(): name for name in reader.fieldnames if name}
-    missing = [col for col in REQUIRED_COLUMNS if col not in lower_to_actual]
-    if missing:
-        raise RuntimeError(
-            "CSV is missing required columns: " + ", ".join(missing)
-        )
+    column_map = build_column_map(reader.fieldnames)
 
     commitments: list[dict[str, str]] = []
     for row in reader:
         normalized = {}
-        for key in REQUIRED_COLUMNS:
-            actual = lower_to_actual[key]
-            normalized[key] = (row.get(actual) or "").strip()
+        for internal_name, actual_name in column_map.items():
+            normalized[internal_name] = (row.get(actual_name) or "").strip()
 
         # Skip blank lines.
         if not any(normalized.values()):
