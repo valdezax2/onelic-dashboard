@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>One LIC Plan - Neighborhood Dashboard</title>
+  <meta name="description" content="Track promises and commitments made under the One LIC Neighborhood Plan in Long Island City, Queens, NYC.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/main.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar__logo">
+        <div class="sidebar__logo-icon">LIC</div>
+        <div>
+          <div class="sidebar__logo-label">One LIC Plan</div>
+          <div class="sidebar__logo-sub">Neighborhood Dashboard</div>
+        </div>
+      </div>
+
+      <nav class="sidebar__nav">
+        <a href="#/" data-route-prefix="#/" class="nav-item" aria-label="Overview">
+          <i data-lucide="house"></i>
+          <span>Overview</span>
+        </a>
+        <a href="#/projects" data-route-prefix="#/projects" class="nav-item" aria-label="Projects">
+          <i data-lucide="map-pin"></i>
+          <span>Projects</span>
+        </a>
+        <a href="#" class="nav-item nav-item--disabled" aria-disabled="true">
+          <i data-lucide="users"></i>
+          <span>Community</span>
+        </a>
+        <a href="#/timeline" data-route-prefix="#/timeline" class="nav-item" aria-label="Timeline">
+          <i data-lucide="calendar"></i>
+          <span>Timeline</span>
+        </a>
+      </nav>
+
+      <div class="sidebar__spacer"></div>
+
+      <div class="sidebar__footer">
+        <div class="sidebar__footer-text">One LIC Neighborhood Plan</div>
+        <div class="sidebar__footer-sub">Long Island City, Queens, NYC</div>
+      </div>
+    </aside>
+
+    <main id="app" class="main-content" aria-live="polite">
+      <div class="page-header">
+        <div class="page-header__title-group">
+          <h1 class="page-header__title">Loading dashboard...</h1>
+          <p class="page-header__sub">Fetching commitments data</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="static/js/main.js"></script>
+</body>
+</html>
