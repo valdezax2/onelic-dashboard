@@ -1,17 +1,17 @@
 {
   "metadata": {
-    "plan_name": "One LIC Neighborhood Plan",
-    "geography": "Long Island City, Queens, NYC",
-    "last_updated": "2026-03-18",
-    "source_url": "https://council.nyc.gov/julie-won/one-lic/",
-    "total_commitments": 11
+    "plan_name": "",
+    "geography": "",
+    "last_updated": "2026-04-29",
+    "source_url": "",
+    "total_commitments": 12
   },
   "commitments": [
     {
       "id": "LIC-H-01",
       "category": "Housing",
       "promise": "New housing enabled by rezoning",
-      "amount": "~14,700–15,000 units",
+      "amount": "~14,700\u201315,000 units",
       "responsible_agency": "DCP / HPD",
       "geography_site": "Rezoning area-wide",
       "timeframe": "Long-term buildout",
@@ -35,7 +35,7 @@
       "id": "LIC-H-03",
       "category": "Housing",
       "promise": "Mandatory Inclusionary Housing mapped in LIC",
-      "amount": "20–25% requirement",
+      "amount": "20\u201325% requirement",
       "responsible_agency": "DCP / HPD",
       "geography_site": "Private development sites",
       "timeframe": "Upon rezoning",
@@ -137,6 +137,18 @@
       "timeframe": "TBD",
       "status": "Planned",
       "notes": "Requires parking relocation",
+      "verification_url": "https://www.nyc.gov/assets/planning/downloads/pdf/our-work/plans/queens/lic-neighborhood-plan/draft-onelic-neighborhood-plan-pages.pdf"
+    },
+    {
+      "id": "LIC-P-05",
+      "category": "Parks",
+      "promise": "Relocation of Baby Park parking",
+      "amount": "$1.9M",
+      "responsible_agency": "DOT / DPR",
+      "geography_site": "Queensbridge",
+      "timeframe": "TBD",
+      "status": "Planned",
+      "notes": "Enabling action",
       "verification_url": "https://www.nyc.gov/assets/planning/downloads/pdf/our-work/plans/queens/lic-neighborhood-plan/draft-onelic-neighborhood-plan-pages.pdf"
     }
   ]
