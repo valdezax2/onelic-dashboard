@@ -23,6 +23,61 @@ This dashboard now runs as a fully static JavaScript site, with no Python server
 
 If `lic_commitments.json` is overwritten once per day and pushed to `main`, GitHub Pages updates automatically through the deploy workflow. Users will see updated data on refresh.
 
+## Google Sheets daily sync (automated)
+
+This repo now includes a scheduled workflow at `.github/workflows/sync-google-sheet.yml`.
+
+It runs once daily and can also be triggered manually, then:
+
+1. Downloads a Google Sheet as CSV
+2. Converts rows to the dashboard JSON schema
+3. Writes `lic_commitments.json`
+4. Commits and pushes only if content changed
+
+### 1) Prepare your Google Sheet
+
+Use a worksheet tab with a header row that matches these column names exactly:
+
+- `id`
+- `category`
+- `promise`
+- `amount`
+- `responsible_agency`
+- `geography_site`
+- `timeframe`
+- `status`
+- `notes`
+- `verification_url`
+
+### 2) Make CSV readable by GitHub Actions
+
+You have two options:
+
+- Public link: publish the sheet or make it readable to anyone with the link.
+- Private link: use a secured integration instead (service account); this repo is currently set up for public/anonymous CSV fetch.
+
+Example CSV URL format:
+
+`https://docs.google.com/spreadsheets/d/<SHEET_ID>/export?format=csv&gid=<GID>`
+
+### 3) Add repository secret and variables
+
+In GitHub repository settings:
+
+- Add secret: `GOOGLE_SHEET_CSV_URL` with your CSV export URL.
+- Optional repo variables:
+  - `PLAN_NAME`
+  - `PLAN_GEOGRAPHY`
+  - `PLAN_SOURCE_URL`
+
+If optional variables are not set, existing metadata/defaults are used.
+
+### 4) Trigger and verify
+
+- Run workflow manually once from Actions tab: `Sync commitments from Google Sheet`
+- Confirm `lic_commitments.json` updates
+- Confirm `Deploy static site to Pages` runs after commit
+
 ## Deploy on GitHub Pages
 
 1. Push this repository to GitHub.

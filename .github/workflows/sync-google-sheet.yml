@@ -1,0 +1,43 @@
+name: Sync commitments from Google Sheet
+
+on:
+  schedule:
+    - cron: "0 10 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Update lic_commitments.json from Google Sheet
+        env:
+          GOOGLE_SHEET_CSV_URL: ${{ secrets.GOOGLE_SHEET_CSV_URL }}
+          PLAN_NAME: ${{ vars.PLAN_NAME }}
+          PLAN_GEOGRAPHY: ${{ vars.PLAN_GEOGRAPHY }}
+          PLAN_SOURCE_URL: ${{ vars.PLAN_SOURCE_URL }}
+        run: python scripts/sync_from_google_sheet.py
+
+      - name: Commit and push changes
+        run: |
+          if git diff --quiet lic_commitments.json; then
+            echo "No changes detected."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add lic_commitments.json
+          git commit -m "chore(data): sync commitments from Google Sheet"
+          git push
