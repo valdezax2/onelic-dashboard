@@ -2,9 +2,9 @@
   "metadata": {
     "plan_name": "",
     "geography": "",
-    "last_updated": "2026-04-30",
+    "last_updated": "2026-05-01",
     "source_url": "",
-    "total_commitments": 12
+    "total_commitments": 13
   },
   "commitments": [
     {
@@ -150,6 +150,18 @@
       "status": "Planned",
       "notes": "Enabling action",
       "verification_url": "https://www.nyc.gov/assets/planning/downloads/pdf/our-work/plans/queens/lic-neighborhood-plan/draft-onelic-neighborhood-plan-pages.pdf"
+    },
+    {
+      "id": "LIC-J-01",
+      "category": "Jobs",
+      "promise": "Job creation claim",
+      "amount": "~14,000 jobs",
+      "responsible_agency": "Mayor\u2019s Office",
+      "geography_site": "LIC",
+      "timeframe": "Long-term",
+      "status": "Claimed",
+      "notes": "Projection, not binding",
+      "verification_url": "https://www.nyc.gov/mayors-office/news/2025/11/most-pro-housing-administration-in-city-history--mayor-adams-cel"
     }
   ]
 }
